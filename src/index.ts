@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config(); // Load environment variables from .env file
 import express from 'express';
-import { config } from './config';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
@@ -59,7 +58,7 @@ const swaggerSpec = swaggerJSDoc(options);
      */
     app.use(ExceptionsHandler);
 
-    app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
+    app.listen(process.env.API_PORT, () => console.log('Silence, ça tourne sur le port ' + process.env.API_PORT));
   } catch (err) {
     console.error('Unable to connect to the database:', err);
     process.exit(1); // Exit the application with a failure code
