@@ -10,6 +10,7 @@ A basic template for backend projects using Node.js, Express.js, and TypeScript.
 - **Nodemon**: Automatically restarts the server in development mode.
 - **Swagger Documentation**: Generates interactive API documentation using Swagger.
 - **Environment management**: Utilizes Dotenv for managing environment variables.
+- **Docker**: Containerization for easy deployment and scalability.
 
 ## 🚀 Getting Started
 
