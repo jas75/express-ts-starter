@@ -11,8 +11,6 @@ import cors from 'cors';
 import { ExceptionsHandler } from './middlewares/exceptions.handler';
 import { UnknownRoutesHandler } from './middlewares/unknownRoutes.handler';
 import morgan from 'morgan'
-import { RapidAPIController } from './ressources/rapidapi/rapidapi.controller';
-import { LangchainController } from './ressources/langchain/langchain.controller';
 import { GeocodingController } from './ressources/geocoding/geocoding.controller';
 import { rateLimit } from 'express-rate-limit';
 import swaggerUi from 'swagger-ui-express';
@@ -46,8 +44,6 @@ const swaggerSpec = swaggerJSDoc(options);
 if (process.env.NODE_ENV === 'development') {
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 }
-app.use('/rapid',  RapidAPIController);
-app.use('/llm',  LangchainController);
 app.use('/geocode', GeocodingController);
 
 
@@ -64,4 +60,4 @@ app.all('*', UnknownRoutesHandler);
  */
 app.use(ExceptionsHandler);
 
-app.listen(config.API_PORT, () => console.log('Silence, ça tourne.'));
+app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
