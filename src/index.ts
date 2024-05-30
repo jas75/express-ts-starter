@@ -12,6 +12,7 @@ import morgan from 'morgan';
 import { GeocodingController } from './ressources/geocoding/geocoding.controller';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
+import pool from './database';
 
 const app = express();
 app.set('trust proxy', 1);
@@ -36,22 +37,31 @@ const options = {
 };
 const swaggerSpec = swaggerJSDoc(options);
 
-if (process.env.NODE_ENV === 'development') {
-  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-}
-app.use('/geocode', GeocodingController);
+// Database test connection
+(async () => {
+  try {
+    await pool.query('SELECT 1');
+    console.log('Connected to the database');
+    if (process.env.NODE_ENV === 'development') {
+      app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    }
+    app.use('/geocode', GeocodingController);
+    // app.get('/', (req, res) => res.send('🏠'));
 
-// app.get('/', (req, res) => res.send('🏠'));
+    /**
+     * Pour toutes les autres routes non définies, on retourne une erreur
+     */
+    app.all('*', UnknownRoutesHandler);
 
-/**
- * Pour toutes les autres routes non définies, on retourne une erreur
- */
-app.all('*', UnknownRoutesHandler);
+    /**
+     * Gestion des erreurs
+     * /!\ Cela doit être le dernier `app.use`
+     */
+    app.use(ExceptionsHandler);
 
-/**
- * Gestion des erreurs
- * /!\ Cela doit être le dernier `app.use`
- */
-app.use(ExceptionsHandler);
-
-app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
+    app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
+  } catch (err) {
+    console.error('Unable to connect to the database:', err);
+    process.exit(1); // Exit the application with a failure code
+  }
+})();
