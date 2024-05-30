@@ -13,6 +13,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import pool from './database';
 import { AuthController } from './ressources/auth/auth.controller';
+import { config } from './config';
 
 const app = express();
 app.set('trust proxy', 1);
@@ -40,7 +41,7 @@ const swaggerSpec = swaggerJSDoc(options);
 (async () => {
   try {
     await pool.query('SELECT 1');
-    console.log('Connected to the database');
+    console.log('Database runs on port ' + config.POSTGRES_PORT);
     if (process.env.NODE_ENV === 'development') {
       app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     }
@@ -59,7 +60,7 @@ const swaggerSpec = swaggerJSDoc(options);
      */
     app.use(ExceptionsHandler);
 
-    app.listen(process.env.API_PORT, () => console.log('Silence, ça tourne sur le port ' + process.env.API_PORT));
+    app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
   } catch (err) {
     console.error('Unable to connect to the database:', err);
     process.exit(1); // Exit the application with a failure code
