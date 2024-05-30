@@ -36,10 +36,15 @@ A basic template for backend projects using Node.js, Express.js, and TypeScript.
     npm install
     ```
 
-4. Start the development server:
+4. Run the server:
 
-    ```bash
+     ```bash
+    # Development mode
     npm run dev
+
+    # Production mode
+    npm run build
+    npm run start:prod
     ```
 
 5. Access the API at `http://localhost:3000`.
