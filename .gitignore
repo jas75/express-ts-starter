@@ -1,0 +1,8 @@
+node_modules
+build
+.env
+notes.txt
+combined.log
+error.log
+help.json
+help2.json
