@@ -1,4 +1,5 @@
-import { NextFunction, Request, Response } from 'express'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NextFunction, Request, Response } from 'express';
 
 /**
  * Middleware de gestion globale des erreurs
@@ -15,18 +16,18 @@ export const ExceptionsHandler = (err: any, _req: Request, res: Response, next: 
    * Voir "The default error handler" dans la doc officielle indiquée plus haut
    */
   if (res.headersSent) {
-    return next(err)
+    return next(err);
   }
 
   /**
    * Si c'est le cas, on sait que c'est notre propre erreur
    */
   if (err.status && err.error) {
-    return res.status(err.status).json({ error: err.error })
+    return res.status(err.status).json({ error: err.error });
   }
 
   /**
    * Dans les autres cas, on retourne une 500
    */
-  return res.status(500).json(err.body)
-}
+  return res.status(500).json(err.body);
+};

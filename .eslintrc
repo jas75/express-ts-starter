@@ -2,14 +2,15 @@
     "parser": "@typescript-eslint/parser",
     "extends": [
         "plugin:@typescript-eslint/recommended",
-        "prettier"
-    ],
+        "prettier"    ],
     "plugins": ["prettier"],
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "rules": {
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "semi": "error" ,// Exiger des points-virgules à la fin de chaque instruction
+        "@typescript-eslint/no-explicit-any": "off" // Désactiver la règle @typescript-eslint/no-explicit-any
     }
 }

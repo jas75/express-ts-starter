@@ -41,15 +41,15 @@
  */
 
 export interface ReverseGeocodingResponse {
-  house_number: string
-  road: string
-  city_block: string
-  suburb: string
-  city_district: string
-  city: string
-  state: string
-  region: string
-  postcode: string
-  country: string
-  country_code: string
+  house_number: string;
+  road: string;
+  city_block: string;
+  suburb: string;
+  city_district: string;
+  city: string;
+  state: string;
+  region: string;
+  postcode: string;
+  country: string;
+  country_code: string;
 }

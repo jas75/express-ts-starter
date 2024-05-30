@@ -1,4 +1,4 @@
-import { ApiException } from '../types/exceptions'
+import { ApiException } from '../types/exceptions';
 
 /**
  * Classe générique qui sert à créer des erreurs HTTP (ici 400 et 404)
@@ -11,11 +11,11 @@ import { ApiException } from '../types/exceptions'
  * Ici `this.error = error` et `this.status = status`
  */
 export class Exception implements ApiException {
-  public message: any
-  public code: number
+  public message: any;
+  public code: number;
   constructor(message: any, code: number) {
-    this.message = message
-    this.code = code
+    this.message = message;
+    this.code = code;
   }
 }
 
@@ -27,7 +27,7 @@ export class NotFoundException extends Exception {
    * On appelle le `constructor` de la classe parente `Exception`
    */
   constructor(error: any) {
-    super(error, 404)
+    super(error, 404);
   }
 }
 
@@ -39,6 +39,6 @@ export class BadRequestException extends Exception {
    * On appelle le `constructor` de la classe parente `Exception`
    */
   constructor(error: any) {
-    super(error, 400)
+    super(error, 400);
   }
 }
