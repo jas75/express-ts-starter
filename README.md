@@ -2,7 +2,7 @@
 
 A basic template for backend projects using Node.js, Express.js, and TypeScript.
 
-### 📋 Requirements
+## 📋 Requirements
 
 - Node.js (version 12.x.x or higher)
 - NPM 
