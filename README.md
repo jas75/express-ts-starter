@@ -2,6 +2,12 @@
 
 A basic template for backend projects using Node.js, Express.js, and TypeScript.
 
+### 📋 Requirements
+
+- Node.js (version 12.x.x or higher)
+- NPM 
+- PostgreSQL
+
 ## 🛠️ Features
 
 - **TypeScript**: Writing server-side JavaScript with TypeScript.
