@@ -1,4 +1,4 @@
 export interface ApiException {
-    message: any
-    code: number
-  }
+  message: any
+  code: number
+}

@@ -11,11 +11,11 @@ import { ApiException } from '../types/exceptions'
  * Ici `this.error = error` et `this.status = status`
  */
 export class Exception implements ApiException {
-  public message: any;
-  public code: number;
+  public message: any
+  public code: number
   constructor(message: any, code: number) {
-    this.message = message;
-    this.code = code;
+    this.message = message
+    this.code = code
   }
 }
 

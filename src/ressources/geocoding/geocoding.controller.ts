@@ -1,12 +1,11 @@
-import { Router } from "express";
-import { GeocodingService } from "./geocoding.service";
-import { Exception } from "../../utils/exceptions";
-import { ReverseGeocodingResponse } from "../../types/geocoding";
+import { Router } from 'express'
+import { GeocodingService } from './geocoding.service'
+import { Exception } from '../../utils/exceptions'
+import { ReverseGeocodingResponse } from '../../types/geocoding'
 
-const GeocodingController = Router();
+const GeocodingController = Router()
 
-const service: GeocodingService = new GeocodingService();
-
+const service: GeocodingService = new GeocodingService()
 
 /**
  * @openapi
@@ -38,22 +37,22 @@ const service: GeocodingService = new GeocodingService();
  *                 $ref: '#/components/schemas/ReverseGeocodingResponse'
  *       400:
  *         description: Bad request. This can happen due to invalid input format or other client errors.
-*/
-GeocodingController.get('/reverse/:lon/:lat', async (req,res) => {
-    try {
-        if (!req.params.lon) {
-            throw new Exception('no longitude attribute provided', 400);
-        } else if (!req.params.lat) {
-            throw new Exception('no latitude attribute provided', 400);
-        }
-        const response: ReverseGeocodingResponse | any = await service.fetchReverseGeocoding(req.params.lon,req.params.lat);
-        if (response.error) {
-            throw new Exception(response.error, 400);
-        }
-        return res.status(200).json(response);
-    } catch (err: any) {
-        return res.status(400).json(err);
+ */
+GeocodingController.get('/reverse/:lon/:lat', async (req, res) => {
+  try {
+    if (!req.params.lon) {
+      throw new Exception('no longitude attribute provided', 400)
+    } else if (!req.params.lat) {
+      throw new Exception('no latitude attribute provided', 400)
     }
-});
+    const response: ReverseGeocodingResponse | any = await service.fetchReverseGeocoding(req.params.lon, req.params.lat)
+    if (response.error) {
+      throw new Exception(response.error, 400)
+    }
+    return res.status(200).json(response)
+  } catch (err: any) {
+    return res.status(400).json(err)
+  }
+})
 
-export { GeocodingController };
+export { GeocodingController }
