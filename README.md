@@ -11,6 +11,7 @@ A basic template for backend projects using Node.js, Express.js, and TypeScript.
 - **Swagger Documentation**: Generates interactive API documentation using Swagger.
 - **Environment management**: Utilizes Dotenv for managing environment variables.
 - **Docker**: Containerization for easy deployment and scalability.
+- **ESLint & Prettier Integration**: Enforce code style and formatting conventions.
 
 ## 🚀 Getting Started
 
