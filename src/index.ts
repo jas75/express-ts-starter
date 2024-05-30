@@ -12,10 +12,10 @@ import { GeocodingController } from './ressources/geocoding/geocoding.controller
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import pool from './database';
+import { AuthController } from './ressources/auth/auth.controller';
 
 const app = express();
 app.set('trust proxy', 1);
-
 app.use(morgan('tiny'));
 app.use(compression());
 app.use(cookieParser());
@@ -45,6 +45,7 @@ const swaggerSpec = swaggerJSDoc(options);
       app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     }
     app.use('/geocode', GeocodingController);
+    app.use('/auth', AuthController);
     // app.get('/', (req, res) => res.send('🏠'));
 
     /**
