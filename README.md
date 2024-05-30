@@ -14,6 +14,7 @@ A basic template for backend projects using Node.js, Express.js, and TypeScript.
 - **ESLint & Prettier Integration**: Enforce code style and formatting conventions.
 - **Rate Limiter**: Integrated rate limiter for API request throttling.
 
+
 ## 🚀 Getting Started
 
 1. Clone the repository:

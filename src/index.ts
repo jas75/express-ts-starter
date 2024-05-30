@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config(); // Load environment variables from .env file
-// import * as swaggerDocument from './../swagger.json'
 import express from 'express';
-// import http from 'http';
 import { config } from './config';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -24,15 +22,14 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
-// app.use(limiter);
 
 // Swagger
 const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Planner api',
-      version: '0.1.2'
+      title: 'express-ts-starter',
+      version: '0.0.1'
     }
   },
   apis: ['./**/*.ts'] // files containing annotations as above
