@@ -1,6 +1,6 @@
 # Express TypeScript Starter 🚀
 
-A basic template for backend projects using Node.js, Express.js, and TypeScript.
+A basic template for backend projects using Express.js, TypeScript and PostgreSQL.
 
 ## 📋 Requirements
 
