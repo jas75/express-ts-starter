@@ -1,0 +1,18 @@
+{
+    "dev": {
+      "driver": "pg",
+      "host": "localhost",
+      "database": "express-ts",
+      "user": "postgres",
+      "password": "postgres",
+      "port": 5432
+    },
+    "test": {
+      "driver": "pg",
+      "host": "localhost",
+      "database": "your-test-db",
+      "user": "your-username",
+      "password": "postgres",
+      "port": 5432
+    }
+  }

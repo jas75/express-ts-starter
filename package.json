@@ -9,7 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
-    "format": "eslint src/**/*.ts --fix"
+    "format": "eslint src/**/*.ts --fix",
+    "migrate:up": "db-migrate --env dev up",
+    "migrate:create": "node scripts/createMigration.js"
   },
   "keywords": [],
   "author": "",
@@ -54,6 +56,8 @@
     "compression": "1.7.4",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
+    "db-migrate": "^0.11.14",
+    "db-migrate-pg": "^1.5.2",
     "express": "4.18.2",
     "express-rate-limit": "7.1.5",
     "express-validator": "7.0.1",
