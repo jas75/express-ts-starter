@@ -10,7 +10,8 @@
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
-    "migrate:up": "db-migrate --env dev up",
+    "migrate:up": "db-migrate up",
+    "migrate:down": "db-migrate down",
     "migrate:create": "node scripts/createMigration.js"
   },
   "keywords": [],

@@ -21,6 +21,7 @@ A basic template for backend projects using Node.js, Express.js, and TypeScript.
 - **Rate Limiter**: Integrated rate limiter for API request throttling.
 - **PostgreSQL Integration**: Database integration using PostgreSQL.
 - **Authentication with Passport**: User authentication setup with Passport.
+- **Database Migrations**: Manage database schema changes with `db-migrate`.
 
 ## 🚀 Getting Started
 
@@ -41,8 +42,17 @@ A basic template for backend projects using Node.js, Express.js, and TypeScript.
     ```bash
     npm install
     ```
+4. Create a PostgreSQL database.
 
-4. Run the server:
+5. Create a `.env` file at the root of the project by copying the `.env.template` file and updating the values as needed.
+
+6. Run the database migrations to set up the schema:
+
+    ```bash
+    npm run migrate:up
+    ```
+
+7. Run the server:
 
      ```bash
     # Development mode
@@ -53,7 +63,7 @@ A basic template for backend projects using Node.js, Express.js, and TypeScript.
     npm run start:prod
     ```
 
-5. Access the API at `http://localhost:3000`.
+8. Access the API at `http://localhost:3000`.
 
 ## 📖 Documentation
 
