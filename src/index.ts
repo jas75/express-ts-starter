@@ -60,9 +60,13 @@ const swaggerSpec = swaggerJSDoc(options);
      */
     app.use(ExceptionsHandler);
 
-    app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
+    if (require.main === module) {
+      app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
+    }
   } catch (err) {
     console.error('Unable to connect to the database:', err);
     process.exit(1); // Exit the application with a failure code
   }
 })();
+
+export default app;

@@ -1,2 +1,3 @@
 scripts
 migrations
+jest.config.js
