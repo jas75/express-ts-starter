@@ -36,7 +36,7 @@ const options = {
   apis: ['./**/*.ts'] // files containing annotations as above
 };
 const swaggerSpec = swaggerJSDoc(options);
-// 
+
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 }
@@ -44,7 +44,6 @@ app.use('/geocode', GeocodingController);
 app.use('/auth', AuthController);
 // app.get('/', (req, res) => res.send('🏠'));
 
-console.log('index.ts');
 /**
  * Pour toutes les autres routes non définies, on retourne une erreur
  */
@@ -57,8 +56,7 @@ console.log('index.ts');
 // app.use(ExceptionsHandler);
 
 // if (require.main === module) {
-app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
-// }
+const server = app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
 // Database test connection
 (async () => {
   try {
@@ -70,4 +68,4 @@ app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port '
   }
 })();
 
-export default app;
+export { app, server, pool };

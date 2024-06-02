@@ -11,5 +11,8 @@ const pool = new Pool({
   password: POSTGRES_PASSWORD, // Remplacez par votre mot de passe PostgreSQL
   port: parseInt(POSTGRES_PORT as string) // Le port par défaut de PostgreSQL
 });
+export const closePool = async () => {
+  await pool.end();
+};
 
 export default pool;

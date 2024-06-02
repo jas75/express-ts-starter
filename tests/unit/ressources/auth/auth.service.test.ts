@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import jwt from 'jsonwebtoken';
-// import { QueryResult } from 'pg';
 import { AuthService } from '../../../../src/ressources/auth/auth.service';
 import pool from '../../../../src/database';
 // Mock pour pool.query
@@ -12,12 +11,12 @@ describe('AuthService', () => {
   let authService: AuthService;
   const mockPoolQuery = pool.query as jest.Mock;
 
-  // beforeEach(() => {
-  //   authService = new AuthService();
-  //   mockPoolQuery.mockClear();
-  // });
+  beforeEach(() => {
+    authService = new AuthService();
+    mockPoolQuery.mockClear();
+  });
 
-  describe('registertUser', () => {
+  describe('registerUser', () => {
     it('should insert a user into the database', async () => {
       // Mock la réponse de pool.query
       mockPoolQuery.mockResolvedValueOnce({
