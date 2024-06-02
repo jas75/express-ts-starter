@@ -67,5 +67,5 @@ A basic template for backend projects using Express.js, TypeScript and PostgreSQ
 
 ## 📖 Documentation
 
-- **Swagger Documentation**: Visit `http://localhost:3000/docs` to explore the API documentation.
+- **Swagger Documentation**: Visit `http://localhost:3000/api-doc` to explore the API documentation.
 

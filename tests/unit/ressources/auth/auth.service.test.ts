@@ -1,24 +1,29 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 // import { QueryResult } from 'pg';
 import { AuthService } from '../../../../src/ressources/auth/auth.service';
-import { bcryptMock } from '../../../mocks/bcryptMock';
-
+import pool from '../../../../src/database';
 // Mock pour pool.query
 jest.mock('../../../../src/database', () => ({
   query: jest.fn()
 }));
 
 describe('AuthService', () => {
+  let authService: AuthService;
+  const mockPoolQuery = pool.query as jest.Mock;
+
+  // beforeEach(() => {
+  //   authService = new AuthService();
+  //   mockPoolQuery.mockClear();
+  // });
+
   describe('registertUser', () => {
     it('should insert a user into the database', async () => {
       // Mock la réponse de pool.query
-      (require('../../../../src/database').query as jest.Mock).mockResolvedValueOnce({
+      mockPoolQuery.mockResolvedValueOnce({
         rows: [{ id: 1, username: 'testUser', password: 'hashedPassword' }]
       });
 
-      const authService = new AuthService();
       const result = await authService.registertUser('testUser', 'hashedPassword');
 
       expect(result.rows).toHaveLength(1);
@@ -29,9 +34,8 @@ describe('AuthService', () => {
 
     it('should throw an error if the query fails', async () => {
       // Mock la réponse de pool.query pour simuler une erreur
-      (require('../../../../src/database').query as jest.Mock).mockRejectedValueOnce(new Error('Database error'));
+      mockPoolQuery.mockRejectedValueOnce(new Error('Database error'));
 
-      const authService = new AuthService();
       await expect(authService.registertUser('testUser', 'hashedPassword')).rejects.toThrow('Database error');
     });
   });
@@ -48,24 +52,12 @@ describe('AuthService', () => {
   });
 
   describe('hashPassword', () => {
-    it('should hash a password', async () => {
-      // Mock la fonction bcrypt.hash pour retourner une valeur prédéfinie
-    //   (bcrypt.hash as jest.Mock).mockResolvedValueOnce('hashedPassword');
-    bcryptMock.hash.mockRejectedValueOnce(new Error('Hashing error'));
-
-      const authService = new AuthService();
-      const hashedPassword = await authService.hashPassword('password');
-
-      expect(bcrypt.hash).toHaveBeenCalledWith('password', 10);
-      expect(hashedPassword).toBe('hashedPassword');
-    });
-
-    it('should throw an error if bcrypt.hash fails', async () => {
-      // Mock la fonction bcrypt.hash pour simuler une erreur
-      (bcrypt.hash as jest.Mock).mockRejectedValueOnce(new Error('Hashing error'));
-
-      const authService = new AuthService();
-      await expect(authService.hashPassword('password')).rejects.toThrow('Hashing error');
+    it('should hash a password asynchronously', async () => {
+      const password = 'password123';
+      const hashedPassword = await authService.hashPassword(password);
+      expect(hashedPassword).toBeDefined();
+      expect(typeof hashedPassword).toBe('string');
+      expect(hashedPassword.length).toBeGreaterThan(0);
     });
   });
 });

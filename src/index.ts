@@ -36,33 +36,34 @@ const options = {
   apis: ['./**/*.ts'] // files containing annotations as above
 };
 const swaggerSpec = swaggerJSDoc(options);
+// 
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+}
+app.use('/geocode', GeocodingController);
+app.use('/auth', AuthController);
+// app.get('/', (req, res) => res.send('🏠'));
 
+console.log('index.ts');
+/**
+ * Pour toutes les autres routes non définies, on retourne une erreur
+ */
+// app.all('*', UnknownRoutesHandler);
+
+/**
+ * Gestion des erreurs
+ * /!\ Cela doit être le dernier `app.use`
+ */
+// app.use(ExceptionsHandler);
+
+// if (require.main === module) {
+app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
+// }
 // Database test connection
 (async () => {
   try {
     await pool.query('SELECT 1');
     console.log('Database runs on port ' + config.POSTGRES_PORT);
-    if (process.env.NODE_ENV === 'development') {
-      app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-    }
-    app.use('/geocode', GeocodingController);
-    app.use('/auth', AuthController);
-    // app.get('/', (req, res) => res.send('🏠'));
-
-    /**
-     * Pour toutes les autres routes non définies, on retourne une erreur
-     */
-    app.all('*', UnknownRoutesHandler);
-
-    /**
-     * Gestion des erreurs
-     * /!\ Cela doit être le dernier `app.use`
-     */
-    app.use(ExceptionsHandler);
-
-    if (require.main === module) {
-      app.listen(config.API_PORT, () => console.log('Silence, ça tourne sur le port ' + config.API_PORT));
-    }
   } catch (err) {
     console.error('Unable to connect to the database:', err);
     process.exit(1); // Exit the application with a failure code
