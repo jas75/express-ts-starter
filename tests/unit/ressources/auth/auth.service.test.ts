@@ -12,8 +12,8 @@ describe('AuthService', () => {
   const mockPoolQuery = pool.query as jest.Mock;
 
   beforeEach(() => {
-    authService = new AuthService();
     mockPoolQuery.mockClear();
+    authService = new AuthService();
   });
 
   describe('registerUser', () => {
@@ -24,7 +24,6 @@ describe('AuthService', () => {
       });
 
       const result = await authService.registertUser('testUser', 'hashedPassword');
-
       expect(result.rows).toHaveLength(1);
       expect(result.rows[0].id).toBe(1);
       expect(result.rows[0].username).toBe('testUser');

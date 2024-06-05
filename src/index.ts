@@ -5,8 +5,8 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
-import { ExceptionsHandler } from './middlewares/exceptions.handler';
-import { UnknownRoutesHandler } from './middlewares/unknownRoutes.handler';
+// import { ExceptionsHandler } from './middlewares/exceptions.handler';
+// import { UnknownRoutesHandler } from './middlewares/unknownRoutes.handler';
 import morgan from 'morgan';
 import { GeocodingController } from './ressources/geocoding/geocoding.controller';
 import swaggerUi from 'swagger-ui-express';
@@ -68,4 +68,4 @@ const server = app.listen(config.API_PORT, () => console.log('Silence, ça tourn
   }
 })();
 
-export { app, server, pool };
+export { app, server };
