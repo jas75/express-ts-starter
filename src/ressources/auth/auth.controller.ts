@@ -7,15 +7,12 @@ const service: AuthService = new AuthService();
 
 AuthController.post('/register', async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  console.log(username);
-  console.log(password);
   try {
     const hashedPassword = await service.hashPassword(password);
     const result = await service.registertUser(username, hashedPassword);
-    console.log(result);
     res.status(200).json(result.rows[0]);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).json({ error: 'Database error', details: err });
   }
 });

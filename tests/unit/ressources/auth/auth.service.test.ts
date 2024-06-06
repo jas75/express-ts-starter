@@ -4,6 +4,7 @@ dotenv.config();
 import jwt from 'jsonwebtoken';
 import { AuthService } from '../../../../src/ressources/auth/auth.service';
 import { pool } from '../../../../src/database';
+import { server } from '../../../../src';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -18,6 +19,7 @@ describe('AuthService', () => {
 
   afterAll(async () => {
     await pool.end();
+    await server.close();
   });
 
   describe('registerUser', () => {
