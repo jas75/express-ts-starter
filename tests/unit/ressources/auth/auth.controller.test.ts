@@ -3,7 +3,6 @@ import { app, server } from '../../../../src';
 import { pool } from '../../../../src/database';
 
 describe('AuthController', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let token: any;
   afterAll(async () => {
     await pool.query(`DELETE FROM users WHERE username = 'testUser'`);

@@ -9,11 +9,7 @@ import { server } from '../../../../src';
 describe('AuthService', () => {
   let authService: AuthService;
 
-  const databaseName = process.env.POSTGRES_DB + '_test';
-  const sanitizedDbName = databaseName.replace(/"/g, '""').replace(/-/g, '_');
-
   beforeAll(() => {
-    process.env.POSTGRES_DB = sanitizedDbName;
     authService = new AuthService();
   });
 
