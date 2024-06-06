@@ -78,7 +78,7 @@ To run tests:
 npm run test
 ```
 
-If a database <app-name>_test doesn't exist, it will be created automatically.
+If a database `app_name`_test doesn't exist, it will be created automatically.
 
 ## 🔒 Security
 
