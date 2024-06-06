@@ -23,6 +23,7 @@ A basic template for backend projects using Express.js, TypeScript and PostgreSQ
 - **Authentication with Passport**: User authentication setup with Passport.
 - **Database Migrations**: Manage database schema changes with `db-migrate`.
 - **Concurrently**: Runs multiple commands concurrently
+- **Tests with Jest**: Unit and integration tests using Jest.
 
 ## 🚀 Getting Started
 
