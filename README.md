@@ -22,6 +22,7 @@ A basic template for backend projects using Express.js, TypeScript and PostgreSQ
 - **PostgreSQL Integration**: Database integration using PostgreSQL.
 - **Authentication with Passport**: User authentication setup with Passport.
 - **Database Migrations**: Manage database schema changes with `db-migrate`.
+- **Concurrently**: Runs multiple commands concurrently
 
 ## 🚀 Getting Started
 
@@ -69,3 +70,16 @@ A basic template for backend projects using Express.js, TypeScript and PostgreSQ
 
 - **Swagger Documentation**: Visit `http://localhost:3000/api-doc` to explore the API documentation.
 
+### 🧪 Running Tests
+
+To run tests:
+
+```bash
+npm run test
+```
+
+If a database <app-name>_test doesn't exist, it will be created automatically.
+
+## 🔒 Security
+
+Ensure to manage secrets and sensitive data securely, even though Dotenv is used. Do not expose them in your Git repository.
