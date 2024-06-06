@@ -1,8 +1,6 @@
 import request from 'supertest';
 import { app, server } from '../../../../src';
-import { AuthService } from '../../../../src/ressources/auth/auth.service';
 import { pool } from '../../../../src/database';
-
 
 describe('AuthController', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,16 +44,8 @@ describe('AuthController', () => {
 
   describe('GET /auth/protected', () => {
     it('should access a protected route', async () => {
-      // const authService = new AuthService();
-      // const hashedPassword = await authService.hashPassword('password');
-      // const result = await authService.registertUser('testuser', hashedPassword);
-      // const token = authService.createJWT(result.rows[0].id, 'testuser', 'your_jwt_secret');
-      // const token = service.createJWT(user.id, user.username, config.JWT_SECRET as string);
-
       const response = await request(app).get('/auth/protected').set('Authorization', `Bearer ${token}`);
-
       expect(response.status).toBe(200);
-      // expect(response.text).toBe('This is a protected route');
     });
 
     it('should return 401 for unauthenticated requests', async () => {
