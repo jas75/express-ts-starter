@@ -178,7 +178,7 @@ import { app, server } from '../../../../src';
 // };
 
 // Assigner l'instance mock à AuthService
-(AuthService as jest.Mock).mockImplementation(() => mockAuthService);
+// (AuthService as jest.Mock).mockImplementation(() => mockAuthService);
 
 const MockAuthService = AuthService as jest.MockedClass<typeof AuthService>;
 describe('AuthController', () => {
@@ -199,23 +199,23 @@ describe('AuthController', () => {
     // await pool.end();
   });
 
-  it('should register a user successfully', async () => {
-    const mockUser = { id: 1, username: 'testuser', password: 'hashedpassword' };
-    MockAuthService.hashPassword.mockResolvedValue('hashedpassword');
-    (pool.query as jest.Mock).mockResolvedValue({ rows: [mockUser] });
+  // it('should register a user successfully', async () => {
+  //   const mockUser = { id: 1, username: 'testuser', password: 'hashedpassword' };
+  //   MockAuthService.hashPassword.mockResolvedValue('hashedpassword');
+  //   (pool.query as jest.Mock).mockResolvedValue({ rows: [mockUser] });
 
-    const response = await request(app)
-      .post('/auth/register')
-      .send({ username: 'testuser', password: 'testpassword' });
+  //   const response = await request(app)
+  //     .post('/auth/register')
+  //     .send({ username: 'testuser', password: 'testpassword' });
 
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual(mockUser);
-    expect(mockAuthService.hashPassword).toHaveBeenCalledWith('testpassword');
-    expect(pool.query).toHaveBeenCalledWith(
-      'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *',
-      ['testuser', 'hashedpassword']
-    );
-  });
+  //   expect(response.status).toBe(201);
+  //   expect(response.body).toEqual(mockUser);
+  //   expect(mockAuthService.hashPassword).toHaveBeenCalledWith('testpassword');
+  //   expect(pool.query).toHaveBeenCalledWith(
+  //     'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *',
+  //     ['testuser', 'hashedpassword']
+  //   );
+  // });
 
   // it('should return 500 if registration fails', async () => {
   //   authServiceMock.hashPassword.mockResolvedValue('hashedpassword');

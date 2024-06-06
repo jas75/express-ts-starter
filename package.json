@@ -6,7 +6,7 @@
   "scripts": {
     "start:prod": "tsc && node ./build/src/index.js",
     "dev": "nodemon",
-    "test": "jest  --detectOpenHandles",
+    "test": "concurrently --kill-others \"npm run test:createdb\" \"jest --detectOpenHandles\"",
     "test:createdb": "node scripts/createTestDatabase.js",
     "build": "tsc",
     "lint": "eslint 'src/**/*.ts' 'tests/**/*.ts'",
@@ -62,6 +62,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "1.20.2",
     "compression": "1.7.4",
+    "concurrently": "^8.2.2",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "db-migrate": "^0.11.14",
