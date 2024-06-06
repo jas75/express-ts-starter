@@ -11,7 +11,7 @@ import morgan from 'morgan';
 import { GeocodingController } from './ressources/geocoding/geocoding.controller';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import pool from './database';
+import { pool, POSTGRES_DB } from './database';
 import { AuthController } from './ressources/auth/auth.controller';
 import { config } from './config';
 
@@ -62,6 +62,7 @@ const server = app.listen(config.API_PORT, () => console.log('Silence, ça tourn
   try {
     await pool.query('SELECT 1');
     console.log('Database runs on port ' + config.POSTGRES_PORT);
+    console.log(`Using '${POSTGRES_DB}' database.`);
   } catch (err) {
     console.error('Unable to connect to the database:', err);
     process.exit(1); // Exit the application with a failure code

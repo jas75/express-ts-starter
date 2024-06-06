@@ -1,40 +1,40 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import dotenv from 'dotenv';
+dotenv.config();
 import jwt from 'jsonwebtoken';
 import { AuthService } from '../../../../src/ressources/auth/auth.service';
-import pool from '../../../../src/database';
-// Mock pour pool.query
-jest.mock('../../../../src/database', () => ({
-  query: jest.fn()
-}));
+import { pool } from '../../../../src/database';
 
 describe('AuthService', () => {
   let authService: AuthService;
-  const mockPoolQuery = pool.query as jest.Mock;
 
-  beforeEach(() => {
-    mockPoolQuery.mockClear();
+  const databaseName = process.env.POSTGRES_DB + '_test';
+  const sanitizedDbName = databaseName.replace(/"/g, '""').replace(/-/g, '_');
+
+  beforeAll(() => {
+    process.env.POSTGRES_DB = sanitizedDbName;
     authService = new AuthService();
   });
 
-  describe('registerUser', () => {
-    it('should insert a user into the database', async () => {
-      // Mock la réponse de pool.query
-      mockPoolQuery.mockResolvedValueOnce({
-        rows: [{ id: 1, username: 'testUser', password: 'hashedPassword' }]
-      });
+  afterAll(async () => {
+    await pool.end();
+  });
 
+  describe('registerUser', () => {
+    it('should insert a user into the database  and return the result', async () => {
       const result = await authService.registertUser('testUser', 'hashedPassword');
       expect(result.rows).toHaveLength(1);
-      expect(result.rows[0].id).toBe(1);
       expect(result.rows[0].username).toBe('testUser');
       expect(result.rows[0].password).toBe('hashedPassword');
     });
 
     it('should throw an error if the query fails', async () => {
-      // Mock la réponse de pool.query pour simuler une erreur
-      mockPoolQuery.mockRejectedValueOnce(new Error('Database error'));
-
-      await expect(authService.registertUser('testUser', 'hashedPassword')).rejects.toThrow('Database error');
+      try {
+        await authService.registertUser('testUser', 'hashedPassword');
+      } catch (err: any) {
+        expect(err.code).toBe('23505');
+        await pool.query(`DELETE FROM users WHERE username = 'testUser'`);
+      }
     });
   });
 

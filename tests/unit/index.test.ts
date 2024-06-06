@@ -1,6 +1,6 @@
 import { app, server } from '../../src/index';
 import request from 'supertest';
-import pool from '../../src/database';
+import { pool } from '../../src/database';
 
 describe('Test server initialization and routes', () => {
   afterAll(async () => {

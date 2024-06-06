@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import bcrypt from 'bcrypt';
 import { QueryResult } from 'pg';
-import pool from '../../database';
+import { pool } from '../../database';
 import jwt from 'jsonwebtoken';
 
 export class AuthService {

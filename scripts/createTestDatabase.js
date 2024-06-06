@@ -39,7 +39,7 @@ async function createTestDatabase() {
 
             process.env.POSTGRES_DB = sanitizedDbName;
             const execAsync = util.promisify(exec);
-            console.log('Running migrations ..')
+            console.log('Running migrations ..');
             await execAsync('npm run migrate:up:test');
             console.log('Migrations done.');
             

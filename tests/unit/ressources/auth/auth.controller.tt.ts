@@ -40,7 +40,7 @@
 //     authService.registertUser = jest.fn();
 
 //   });
-  
+
 //   afterAll(async () => {
 //     jest.clearAllMocks();
 //     await server.close();
@@ -145,8 +145,6 @@
 //   // });
 // });
 
-
-
 import request from 'supertest';
 import express from 'express';
 import { AuthService } from '../../../../src/ressources/auth/auth.service';
@@ -182,18 +180,16 @@ import { app, server } from '../../../../src';
 
 const MockAuthService = AuthService as jest.MockedClass<typeof AuthService>;
 describe('AuthController', () => {
-
   beforeEach(() => {
     // app = express();
     // app.use(express.json());
-
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-    afterAll(async () => {
+  afterAll(async () => {
     // jest.clearAllMocks();
     await server.close();
     // await pool.end();

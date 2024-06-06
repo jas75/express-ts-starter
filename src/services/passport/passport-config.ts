@@ -2,7 +2,7 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import bcrypt from 'bcrypt';
-import pool from '../../database';
+import { pool } from '../../database';
 import { config } from '../../config';
 
 const secret = config.JWT_SECRET as string;
