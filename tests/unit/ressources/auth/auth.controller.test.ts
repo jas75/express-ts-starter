@@ -156,20 +156,20 @@ import { AuthController } from '../../../../src/ressources/auth/auth.controller'
 import { app, server } from '../../../../src';
 
 // Mock AuthService
-jest.mock('../../../../src/ressources/auth/auth.service', () => {
-  return {
-    AuthService: jest.fn().mockImplementation(() => ({
-      hashPassword: jest.fn(),
-      registertUser: jest.fn()
-    }))
-  };
-});
+// jest.mock('../../../../src/ressources/auth/auth.service', () => {
+//   return {
+//     AuthService: jest.fn().mockImplementation(() => ({
+//       hashPassword: jest.fn(),
+//       registertUser: jest.fn()
+//     }))
+//   };
+// });
 
-jest.mock('../../../../src/database', () => {
-  return {
-    query: jest.fn()
-  }
-}); // Mock la base de données
+// jest.mock('../../../../src/database', () => {
+//   return {
+//     query: jest.fn()
+//   }
+// }); // Mock la base de données
 
 // Créer une instance mock du AuthService
 // const mockAuthService = {

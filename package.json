@@ -7,6 +7,7 @@
     "start:prod": "tsc && node ./build/src/index.js",
     "dev": "nodemon",
     "test": "jest  --detectOpenHandles",
+    "test:createdb": "node scripts/createTestDatabase.js",
     "build": "tsc",
     "lint": "eslint 'src/**/*.ts' 'tests/**/*.ts'",
     "format": "eslint src/**/*.ts tests/**/*.ts --fix",
