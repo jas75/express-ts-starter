@@ -6,5 +6,5 @@ if (!migrationName) {
   process.exit(1);
 }
 
-const command = `db-migrate create ${migrationName} --sql-file`;
+const command = `node node_modules/db-migrate/bin/db-migrate create ${migrationName} --sql-file`;
 execSync(command, { stdio: 'inherit' });

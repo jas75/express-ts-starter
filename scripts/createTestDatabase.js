@@ -1,5 +1,8 @@
 const dotenv = require('dotenv');
+const { execSync } = require('child_process');
 const { Client } = require('pg');
+const util = require('util');
+const { exec } = require('child_process');
 // Charger les variables d'environnement depuis le fichier .env
 dotenv.config();
 
@@ -12,7 +15,7 @@ const config = {
 };
 
 const databaseName = process.env.POSTGRES_DB + '_test';
-const sanitizedDbName = databaseName.replace(/"/g, '""');
+const sanitizedDbName = databaseName.replace(/"/g, '""').replace(/-/g, '_');;
 
 async function testDatabaseExists(client, dbName) {
     const result = await client.query(`SELECT 1 FROM pg_database WHERE datname = $1`, [sanitizedDbName]);
@@ -31,14 +34,18 @@ async function createTestDatabase() {
         if (exists) {
             console.log(`Database '${sanitizedDbName}' exists`);
         } else {
-            console.log('erreur la ?')
-
             await client.query(`CREATE DATABASE ${sanitizedDbName}`);
-            console.log('il passe pas la ')
             console.log(`Database  '${sanitizedDbName}' created successfully.`);
+
+            process.env.POSTGRES_DB = sanitizedDbName;
+            const execAsync = util.promisify(exec);
+            console.log('Running migrations ..')
+            await execAsync('npm run migrate:up:test');
+            console.log('Migrations done.');
+            
         }
     } catch (err) {
-        console.error('Error creating the database:', err);
+        console.error('Error during process:', err);
     }
 }
 

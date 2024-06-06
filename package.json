@@ -11,9 +11,10 @@
     "build": "tsc",
     "lint": "eslint 'src/**/*.ts' 'tests/**/*.ts'",
     "format": "eslint src/**/*.ts tests/**/*.ts --fix",
-    "migrate:up": "db-migrate up",
-    "migrate:down": "db-migrate down",
-    "migrate:create": "node scripts/createMigration.js"
+    "migrate:up": "node node_modules/db-migrate/bin/db-migrate up",
+    "migrate:down": "node node_modules/db-migrate/bin/db-migrate down",
+    "migrate:create": "node scripts/createMigration.js",
+    "migrate:up:test": "node node_modules/db-migrate/bin/db-migrate up -e test"
   },
   "keywords": [],
   "author": "",
